@@ -1,5 +1,8 @@
 # https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
 # Definition for a binary tree node.
+import collections
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -8,16 +11,16 @@ class TreeNode:
 
 # 解法一：非递归，采用层次遍历法，顺便求出最大深度
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        queue = [root]
+        queue = collections.deque([root])
         res = 0
         while queue:
-            res += 1
             n = len(queue)
-            for i in range(n):
-                curr = queue.pop(0)
+            res += 1
+            for _ in range(n):
+                curr = queue.popleft()
                 if curr.left:
                     queue.append(curr.left)
                 if curr.right:

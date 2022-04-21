@@ -8,22 +8,35 @@ class TreeNode:
 # 解法1：利用完全二叉树性质，完全二叉树=满二叉树的组合
 # 递归的找完全二叉树，即左右子树深度相等，如果不相等，就继续往下层找
 # 最终如果是单结点，一定是完全二叉树
+# 时间复杂度O(logn*logn)，空间复杂度O(logn)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        left, right = root.left, root.right
-        left_depth, right_depth = 0, 0
-        while left:
-            left = left.left
-            left_depth += 1
-        while right:
-            right = right.right
-            right_depth += 1
-        if left_depth == right_depth:
-            # 完全二叉树的结点数量计算方法，2^depth - 1
-            return (2 << left_depth) - 1
-        return self.countNodes(root.left) + self.countNodes(root.right) + 1
+        def cTree(root):
+            if not root:
+                return 0
+            left = root.left
+            right = root.right
+            l_h, r_h = 0, 0
+            while left:
+                l_h += 1
+                left = left.left
+            while right:
+                r_h += 1
+                right = right.right
+            # 左右高度相等，表明是一颗完全二叉树
+            if l_h == r_h:
+                return (2 << l_h) - 1
+            # 高度不相等，分别递归其左右子树，然后加上根节点
+            else:
+                return cTree(root.left) + cTree(root.right) + 1
+        return cTree(root)
+
 
 # 解法2：跟104一样，采取后序遍历的方法
 # 先计算左右子树结点数量，然后加上中间结点

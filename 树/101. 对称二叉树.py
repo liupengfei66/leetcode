@@ -1,10 +1,11 @@
 # https://leetcode-cn.com/problems/symmetric-tree/
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+import collections
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 # 大体来说，判断方法都是，先判断左右子树，如果不符合条件，就直接返回
 # 如果符合条件，就继续判断左右子树，先比较左子树的左节点和右子树的右节点，即外面两个结点相同
 # 再比较左子树的右结点和右子树的左节点

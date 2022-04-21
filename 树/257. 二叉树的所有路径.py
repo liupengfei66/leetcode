@@ -8,23 +8,25 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+# 利用字符串传参实现回溯
 class Solution:
-    def traversal(self, root, path, res):
-        # 第一次遍历到，加入路径
-        path.append(str(root.val))
-        # 找到叶结点，将路径加入最终结果
-        if not root.left and not root.right:
-            res.append('->'.join(path))
-            return
-        if root.left:
-            self.traversal(root.left, path, res)
-            path.pop()  # 递归完成，回溯，path也要相应的回溯
-        if root.right:
-            self.traversal(root.right, path, res)
-            path.pop()  # 同上
-    def binaryTreePaths(self, root: TreeNode) -> List[str]:
-        path, res = [], []
-        self.traversal(root, path, res)
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        def traversal(root, path):
+            if not root:
+                return
+
+            # 叶结点，不需要添加->
+            if not root.left and not root.right:
+                path += str(root.val)
+                res.append(path)
+            else:
+                path += str(root.val) + "->"
+            traversal(root.left, path)
+            traversal(root.right, path)
+
+        res = []
+        traversal(root, "")
         return res
 
 # 解法2：迭代，也是采用前序遍历，也是终止条件不同

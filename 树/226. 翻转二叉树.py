@@ -5,6 +5,7 @@
 # 那么如果此时再按照左中右遍历，那又到了原先的左子树了，画个简单的图就明白了
 # 解法1：迭代，先交换左右子树，再交换左孩子的左右孩子，再交换右孩子的左右孩子
 # Definition for a binary tree node.
+import collections
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -44,8 +45,8 @@ class Solution:
         while queue:
             curr = queue.popleft()
             curr.left, curr.right = curr.right, curr.left
-            if curr.right:
-                queue.append(curr.right)
             if curr.left:
                 queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
         return root

@@ -1,10 +1,10 @@
 # https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 # 借助队列实现，对每一层，按照顺序进入队列
 # 每有一个出队列，将其左右孩子放入队列，实现层次顺序遍历
 # collections.deque是一个高效的双端队列，在popleft时，时间复杂度为O(1)
@@ -17,8 +17,9 @@ class Solution:
         queue = collections.deque([root])
         while queue:
             tmp = []
+            # 每次都是处理一层，貌似也确实不需要判断，处理完整个队列就行了
             n_queue = len(queue)
-            for i in range(n_queue):
+            for _ in range(n_queue):
                 curr = queue.popleft()
                 tmp.append(curr.val)
                 if curr.left:
