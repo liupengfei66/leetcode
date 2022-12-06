@@ -1,35 +1,27 @@
-# Definition for a binary tree node.
-import collections
+# Definition for singly-linked list.
+from typing import List
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+class ListNode:
+    def __init__(self, val=0, next=None):
         self.val = val
-        self.left = left
-        self.right = right
+        self.next = next
 class Solution:
-    def levelOrder(self, root):
-        queue = collections.deque([[root]])
-        res = []
-        while queue:
-            curr_layer = queue.popleft()
-            next_layer = []
-            curr_value = []
-            for node in curr_layer:
-                curr_value.append(node.val)
-                if node.left:
-                    next_layer.append(node.left)
-                if node.right:
-                    next_layer.append(node.right)
-            if not next_layer:
-                queue.append(next_layer)
-            if not curr_value:
-                res.append(curr_value)
-        return res
+    def reverseList(self, head):
+        if not head:
+            return head
+        curr, next = head, head.next
+        while next:
+            curr.next.next = curr 
+            curr.next = None 
+            curr = next 
+            next = next.next 
+        return curr
 
-s= Solution()
-
-left = TreeNode(9)
-right=TreeNode(20)
-root=TreeNode(3, left, right)
-s.levelOrder(root)
+s = Solution()
+n5 = ListNode(5)
+n4 = ListNode(4, n5)
+n3 = ListNode(3, n4)
+n2 = ListNode(2, n3)
+n1 = ListNode(1, n2)
+s.reverseList(n1)
