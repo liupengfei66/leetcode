@@ -1,10 +1,12 @@
 # https://leetcode-cn.com/problems/invert-binary-tree/
+# 左右翻转二叉树
+
 # 这题只要能遍历树的方法，都可以。遍历到每个结点，交换其左右孩子即可。
 # 中序的时候，要注意写法，比较容易错，以递归为例，因为中序结点是先左再中
 # 以root为例，当遍历到root时，root的左子树中，其实已经翻转过一次了，此时到root，进行左右孩子交换，左子树变为了右子树
 # 那么如果此时再按照左中右遍历，那又到了原先的左子树了，画个简单的图就明白了
+
 # 解法1：迭代，先交换左右子树，再交换左孩子的左右孩子，再交换右孩子的左右孩子
-# Definition for a binary tree node.
 import collections
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

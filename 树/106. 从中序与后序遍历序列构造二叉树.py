@@ -1,8 +1,10 @@
 # https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
-# 思路其实比较简单，就是根据后序遍历的最后一个元素确认根节点
+# 给定两个整数数组 inorder 和 postorder ，其中 inorder 是二叉树的中序遍历， 
+# postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树 。
+
+# 根据后序遍历的最后一个元素确认根节点
 # 然后根据中序遍历和根节点，确认左右子树。
 # 然后对左右子树分别递归上述步骤即可。
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -21,13 +23,16 @@ class Solution:
         # 终止条件，后序遍历中只有1个元素，返回该元素
         if len(postorder) == 1:
             return root
+        
         # 2. 根据中序，找到左右子树
         idx_mid = inorder.index(root_val)
         left_inorder = inorder[0: idx_mid]
         right_inorder = inorder[idx_mid+1:]
+
         # 3. 根据中序中左右子树长度，找到后序的左右子树
         left_postorder = postorder[0: idx_mid]
         right_posterorder = postorder[idx_mid: -1]
+
         # 4. 递归调用
         root.left = self.buildTree(left_inorder, left_postorder)
         root.right = self.buildTree(right_inorder, right_posterorder)

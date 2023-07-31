@@ -1,7 +1,10 @@
 # https://leetcode-cn.com/problems/merge-two-binary-trees/
+# 想象一下，当你将其中一棵覆盖到另一棵之上时，两棵树上的一些节点将会重叠（而另一些不会）。
+# 你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；
+# 否则，不为 null 的节点将直接作为新二叉树的节点。
+
 # 这题与101类似，都是同时处理两棵树，可以递归的处理，比较容易想到
 # 也可以采用队列，同时对两颗树进行处理
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -15,12 +18,13 @@ class Solution:
             return root2
         if not root2:
             return root1
-        root = TreeNode(root1.val+root2.val)
+        root = TreeNode(root1.val + root2.val)
         root.left = self.mergeTrees(root1.left, root2.left)
         root.right = self.mergeTrees(root1.right, root2.right)
         return root
 
 # 解法2：迭代法
+import collections
 class Solution:
     def mergeTrees(self, root1: TreeNode, root2: TreeNode) -> TreeNode:
         if not root1:
