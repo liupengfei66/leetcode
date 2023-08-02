@@ -1,7 +1,7 @@
 # https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
-# Definition for a binary tree node.
-import collections
+# 给定一个二叉树 root ，返回其最大深度。根到叶子。
 
+import collections
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

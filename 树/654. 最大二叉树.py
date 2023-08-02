@@ -7,3 +7,26 @@
 # 输入：nums = [3,2,1,6,0,5]
 # 输出：[6,3,5,null,2,0,null,null,1]
 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None 
+
+        # 找到最大值，构建根节点
+        root_value = max(nums)
+        root_idx = nums.index(root_value)
+        root = TreeNode(root_value)
+
+        # 递归构建其左右子树
+        left_nums = nums[0:root_idx]
+        right_nums = nums[root_idx+1:]
+        root.left = self.constructMaximumBinaryTree(left_nums)
+        root.right = self.constructMaximumBinaryTree(right_nums)
+
+        return root

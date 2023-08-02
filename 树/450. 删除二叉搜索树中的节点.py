@@ -1,11 +1,14 @@
 # https://leetcode-cn.com/problems/delete-node-in-a-bst/
+# 给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。
+# 返回二叉搜索树（有可能被更新）的根节点的引用。
+
 # 递归，删除结点涉及到树结构的调整，调整方法如下
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
         # 遍历到空结点，返回，即没找到需要删除的结点

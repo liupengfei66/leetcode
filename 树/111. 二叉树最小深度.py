@@ -1,5 +1,6 @@
 # https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
-# Definition for a binary tree node.
+# 给定一个二叉树，找出其最小深度。
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val

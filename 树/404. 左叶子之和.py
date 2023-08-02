@@ -1,6 +1,7 @@
 # https://leetcode-cn.com/problems/sum-of-left-leaves/
+# 给定二叉树的根节点 root ，返回所有左叶子之和。
+
 # 迭代法，前中序遍历都可以，只要明确如何判断左叶子的条件就行
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val

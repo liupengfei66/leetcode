@@ -1,6 +1,7 @@
 # https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+# 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+
 # 对比于236，本题因为是BST简单很多，只要根节点在左右孩子的区间内，那么就满足结果
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x

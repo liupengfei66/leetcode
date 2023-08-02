@@ -1,5 +1,6 @@
 # https://leetcode-cn.com/problems/count-complete-tree-nodes/
-# Definition for a binary tree node.
+# 给你一棵 完全二叉树 的根节点 root ，求出该树的节点个数。完全二叉树，不是满二叉树。
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -9,12 +10,12 @@ class TreeNode:
 # 递归的找完全二叉树，即左右子树深度相等，如果不相等，就继续往下层找
 # 最终如果是单结点，一定是完全二叉树
 # 时间复杂度O(logn*logn)，空间复杂度O(logn)
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
         def cTree(root):
@@ -52,4 +53,19 @@ class Solution:
         return self.getNodeNum(root)
 
 # 解法3：跟104一样，直接利用层次遍历法，然后记录结点数量即可。
-
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        queue = collections.deque([root])
+        res = 0
+        while queue:
+            n = len(queue)
+            res += n
+            for _ in range(n):
+                curr = queue.popleft()
+                if curr.left:
+                    queue.append(curr.left)
+                if curr.right:
+                    queue.append(curr.right)
+        return res

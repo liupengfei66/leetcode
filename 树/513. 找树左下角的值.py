@@ -1,5 +1,6 @@
 # https://leetcode-cn.com/problems/find-bottom-left-tree-value/
-# Definition for a binary tree node.
+# 给定一个二叉树的 根节点 root，请找出该二叉树的 最底层 最左边 节点的值。
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -24,7 +25,7 @@ class Solution:
                     queue.append(node.left)
         return res
 
-# 解法2，迭代
+# 解法2，递归
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
         self.max_depth = 1

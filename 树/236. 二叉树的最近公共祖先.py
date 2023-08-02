@@ -1,26 +1,22 @@
 # https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
-# 首先，终止条件：我们找到了p或q，或到达叶结点，那么就返回该结点
-# 其次，单层递归：我们找到左右子树中是否包含p和q，如果分别在左右子树，那么当前就是最近的公共祖先，否则一定是都在左子树或都在右子树，题目说了p和q为树中结点
-# 最后，如果都在左子树，那么我们就返回左子树，继续递归的查找
-# 同理，如果都在右子树，就返回右子树，继续递归的查找
-# 这题的方法在于，首先我们从上往下寻找，找到p或q时，我们在返回时，将p或q给带上来
-# 也就是在返回的过程中，不断的将p或q往上提升，最终在最近公共祖先处，左右子树的结果都是非空的了
-# 如果提前找到了，那么一个子树一定是空，此时只返回非空子树的结果即可。
+# 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+# 对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）
+
 
 # 这题可以这么理解：每个结点，都接收左右子树的状态，然后判断是否符合祖先结点的条件
 # 因为是递归调用，所以找到后，也是带着已有的结果，逐层返回
 # 这题是假设p,q一定都是存在的，例如下面这个例子，如果是查找5,4。
 # 那么直接从3开始，查到左子树，返回5；查到右子树，返回空，就直接返回了5，并没有向下继续查找了
+# 如果p或q有一个不存在，那么就会只返回存在的那个节点本身，例如p不存在，结果就是返回q
 #     3
 #  5      1
 # 6  2  0  8
 #   7 4
-# Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, x):
+    def __init__(self, x, left=None, right=None):
         self.val = x
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
@@ -34,3 +30,23 @@ class Solution:
             return left
         else:
             return right
+
+if __name__ == '__main__':
+    node7 = TreeNode(7)
+    node4 = TreeNode(4)
+    node2 = TreeNode(2, node7, node4)
+    node6 = TreeNode(6)
+    node5 = TreeNode(5, node6, node2)
+    node0 = TreeNode(0)
+    node8 = TreeNode(8)
+    node1 = TreeNode(1, node0, node8)
+    node3 = TreeNode(3, node5, node1)
+
+    node9 = TreeNode(9)
+
+    solution = Solution()
+    res = solution.lowestCommonAncestor(node3, node9, node7)
+    if res:
+        print("ancestor:", res.val)
+    else:
+        print("no ancestor")

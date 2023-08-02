@@ -1,5 +1,6 @@
 # https://leetcode-cn.com/problems/balanced-binary-tree/
-# Definition for a binary tree node.
+# 给定一个二叉树，判断它是否是高度平衡的二叉树。
+# 左右子树的高度差的绝对值不超过 1
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -35,6 +36,32 @@ class Solution:
         res = self.getDepth(root)
         return False if res == -1 else True
 
+# 解法二：迭代法
+# 先遍历到叶子层节点，从右到左
+# 在遍历过程中，记录每个真实节点node和虚拟节点none
+# 在stack.pop()的时候，遇到虚拟节点none，则证明是回溯回去了，开始计算其左右子树高度
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
 
+        height_map = {}
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                stack.append(node)
+                stack.append(None)
+                if node.left: 
+                    stack.append(node.left)
+                if node.right: 
+                    stack.append(node.right)
+            else:
+                real_node = stack.pop()
+                left, right = height_map.get(real_node.left, 0), height_map.get(real_node.right, 0)
+                if abs(left - right) > 1:
+                    return False
+                height_map[real_node] = 1 + max(left, right)
+        return True
 
 
